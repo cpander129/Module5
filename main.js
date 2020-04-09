@@ -1,13 +1,12 @@
 let assignmentButton = document.getElementById("new");
 let newAssignment = document.getElementById("assignment");
 let list = document.querySelector("div");
+let videoList = document.getElementById('videoListContainer');
 let pageToken = '';
 
 //Load google API
 gapi.load("client", loadClient);
 
-
-gapi.load("client", loadClient);
 function loadClient() {
     gapi.client.setApiKey("AIzaSyC9aNiBl0ICQxsJFhR7uZp6X_ij3X_JtKg");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
