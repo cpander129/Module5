@@ -59,7 +59,7 @@ function addAssignmentToList(task) {
     // Create assignment 'p' node
     let para = document.createElement("p");
     // Add text to assignment node from input box
-    para.appendChild(document.createTextNode(task.name))
+    para.appendChild(document.createTextNode(task.name));
     // If the assigment has already been done cross out assignment
     if (task.completed) {
         para.style.textDecoration = 'line-through';
@@ -70,7 +70,7 @@ function addAssignmentToList(task) {
     let dlt = document.createElement("button");
     dlt.setAttribute("id", "delete");
     dlt.setAttribute("type", "button");
-    dlt.setAttribute("class", "btn btn-danger")
+    dlt.setAttribute("class", "btn btn-danger");
     dlt.appendChild(document.createTextNode("Delete"));
     // Add delete funtionality to button
     dlt.onclick = deleteItem;
@@ -104,7 +104,7 @@ function done(e) {
         list.appendChild(div);
     } else {
         // remove line from the text
-        p.style.textDecoration = "none"
+        p.style.textDecoration = "none";
     }
     /*
      * Set value completed of assignment object to the value of the checkbox
@@ -152,16 +152,18 @@ for (let i = 0; i < assignmentArray.length; i++) {
 //Restore array to localStorage
 localStorage.setItem('assignmentArray', JSON.stringify(assignmentArray));
 
+
+//Code from https://artisansweb.net/get-youtube-video-list-by-keywords-using-youtube-search-api-and-javascript/
 function execute(e) {
     /*
      * Set the search string to the assignment text. 
      * By going up one level to get to the div,
      * and then picking the second child of the div which is the <p> tag
      */
-    const searchString = e.target.parentElement.children[1].textContent;
-    const maxresult = 50;
-    const orderby = 'relevance';
- 
+    let searchString = e.target.parentElement.children[1].textContent;
+    let maxresult = 25;
+    let orderby = 'relevance';
+
     var arr_search = {
         "part": 'snippet',
         "type": 'video',
@@ -169,39 +171,41 @@ function execute(e) {
         "maxResults": maxresult,
         "q": searchString
     };
- 
+
     if (pageToken != '') {
         arr_search.pageToken = pageToken;
     }
     return gapi.client.youtube.search.list(arr_search)
-    .then(function(response) {
-        // Handle the results here (response.result has the parsed body).
-        const listItems = response.result.items;
-        if (listItems) {
-            let output = '<h4>Videos</h4><ul>';
- 
-            listItems.forEach(item => {
-                const videoId = item.id.videoId;
-                const videoTitle = item.snippet.title;
-                output += `
+        .then(function (response) {
+                // Handle the results here (response.result has the parsed body).
+                const listItems = response.result.items;
+                if (listItems) {
+                    let output = '<h4>Videos</h4><ul>';
+
+                    listItems.forEach(item => {
+                        const videoId = item.id.videoId;
+                        const videoTitle = item.snippet.title;
+                        output += `
                     <li><a data-fancybox href="https://www.youtube.com/watch?v=${videoId}"><img src="http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg" /></a><p>${videoTitle}</p></li>
                 `;
+                    });
+                    output += '</ul>';
+
+                    if (response.result.prevPageToken) {
+                        output += `<br><a class="paginate" href="#" data-id="${response.result.prevPageToken}" onclick="paginate(event, this)">Prev</a>`;
+                    }
+
+                    if (response.result.nextPageToken) {
+                        output += `<a href="#" class="paginate" data-id="${response.result.nextPageToken}" onclick="paginate(event, this)">Next</a>`;
+                    }
+
+                    // Output list
+                    videoList.innerHTML = output;
+                }
+            },
+            function (err) {
+                console.error("Execute error", err);
             });
-            output += '</ul>';
- 
-            if (response.result.prevPageToken) {
-                output += `<br><a class="paginate" href="#" data-id="${response.result.prevPageToken}" onclick="paginate(event, this)">Prev</a>`;
-            }
- 
-            if (response.result.nextPageToken) {
-                output += `<a href="#" class="paginate" data-id="${response.result.nextPageToken}" onclick="paginate(event, this)">Next</a>`;
-            }
- 
-            // Output list
-            videoList.innerHTML = output;
-        }
-    },
-    function(err) { console.error("Execute error", err); });
 }
 
 // Move right or left in youtube search
