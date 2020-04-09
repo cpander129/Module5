@@ -1,0 +1,28 @@
+body {
+    background-color: thistle;
+    color: steelblue;
+}
+
+p {
+    display: inline;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.todo {
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+footer {
+    color: black;
+}
+
+.paginate {
+    margin-right: 5px;
+}
+
+li {
+    display: inline-block;
+}

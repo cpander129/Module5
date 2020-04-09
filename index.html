@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='UTF8'>
+    <title>To Do List</title>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    
+</head>
+
+<body>
+    <h1>Assignments</h1>
+    <div class='todolist'>
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="assignment">New Assignment</label>
+            <input id="assignment">
+        </div>
+        <button id="new" type="button" class="btn btn-primary">Add Assignment</button>
+    </form>
+    <!--empty div to hold youtube video-->
+    <div id="videoListContainer"></div>
+    <!-- Audio from freesoundslibrary.com provided under Attribution 4.0 International License-->
+    <audio id="ding">
+        <source src="sounds/Ding-sound-effect.mp3" type="audio/mpeg">
+        If you can see this then your browser doesn't support the audio element. The list will still work but you won't hear the satisfying ding when you check off an assignment :(
+    </audio>
+    <footer>
+        <small>Ding sound from user <a href="https://www.freesoundslibrary.com/author/spanac/">SPANAC</a> on freesoundslibrary.com provided under Attribution 4.0 International License</small>
+    </footer>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
